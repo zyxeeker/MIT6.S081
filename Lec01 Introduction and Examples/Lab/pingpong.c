@@ -12,13 +12,14 @@ int main(){
 	char buf[10];
 
 	if(pid == 0){
-		while(read(fd[0],buf,sizeof(buf))){
+		
+		read(fd[0],buf,sizeof(buf));
 			printf("%d: received ping\n",getpid());
 			write(_fd[1],"s",1);
-		}
 		exit(0);
 	}else{
 		write(fd[1],"s",1);
+
 		while(read(_fd[0],buf,sizeof(buf))){
 			printf("%d: received pong\n",getpid());
 			exit(0);
